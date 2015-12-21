@@ -1,0 +1,53 @@
+from collections import OrderedDict
+import operator
+n = input()
+
+factors = OrderedDict()
+prime = dict()
+
+for i in range(2, 10009):
+
+	prime[i] = True
+
+for i in range(2, 10009):
+
+	if prime[i] == True:
+
+		for j in range(i * i, 10009, i):
+
+			prime[j] = False
+
+for i in range(2, n):
+
+	if prime[i]:
+		j = i
+		p = n
+
+		while(p):
+
+			if i in factors:
+
+				p = p / j
+				factors[j] += p
+				#factors[j] += p
+			else:
+
+				p = p / j
+				factors[i] = p
+
+#print factors
+
+#factors = sorted(factors.items(), key = operator.itemgetter(0))
+val =  factors.keys()
+exp = factors.values()
+print str(val[0]) + "^" + str(exp[0]),
+for i in range(1, len(val)):
+	
+	if i == len(val):
+		print " * ",
+		print str(val[i]) + "^" + str(exp[i])
+	
+	print " * ",
+	print str(val[i]) + "^" + str(exp[i]),
+
+
